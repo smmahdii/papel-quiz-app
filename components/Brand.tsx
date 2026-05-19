@@ -1,0 +1,1 @@
+import Image from "next/image";export function Brand(){return <div className="flex items-center gap-3"><Image src="/logo.svg" alt="Papel Edu-Care" width={46} height={46} className="rounded-2xl bg-white shadow-lg"/><div><h1 className="text-lg font-black leading-tight">Papel Edu-Care</h1><p className="text-xs text-slate-500">Sign of Faith!</p></div></div>}

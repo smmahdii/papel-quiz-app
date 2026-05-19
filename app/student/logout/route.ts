@@ -1,0 +1,1 @@
+import { clearStudentId } from "@/lib/auth";import { redirect } from "next/navigation";export async function GET(){clearStudentId();redirect("/")}
