@@ -53,6 +53,7 @@ export function QuizAttemptClient({ quiz, questions }: QuizAttemptClientProps) {
       const timeLimitSeconds = (quiz.time_limit_minutes || 40) * 60;
       const response = await fetch("/api/submit-quiz", {
         method: "POST",
+        credentials: "same-origin",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           quizId: quiz.id,
@@ -61,6 +62,14 @@ export function QuizAttemptClient({ quiz, questions }: QuizAttemptClientProps) {
         }),
       });
       const data = await response.json();
+
+      if (response.status === 401) {
+        alert("Your session expired. Please enter your student information again, then submit.");
+        loadingRef.current = false;
+        setLoading(false);
+        router.push("/?error=session");
+        return;
+      }
 
       if (!response.ok) {
         alert(data.error || "Submit failed");
